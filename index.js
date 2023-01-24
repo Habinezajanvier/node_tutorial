@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = require("./src/routes");
 const mongoose = require("mongoose");
+require("dotenv/config");
 
 const app = express();
 
@@ -12,10 +13,9 @@ app.get("/", (req, res) => {
 });
 
 // Create mongodb connection
-mongoose.connect(
-  "mongodb+srv://janvier:testing123@cluster0.pnymtzl.mongodb.net/?retryWrites=true&w=majority",
-  () => console.log("Connected to mongodb")
+mongoose.connect(process.env.MONGO_URI, () =>
+  console.log("Connected to mongodb")
 );
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
