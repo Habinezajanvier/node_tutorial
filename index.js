@@ -9,7 +9,7 @@ app.use(express.json());
 app.use("/posts", routes);
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my apis" });
+  res.status(200).json({ message: "Welcome to my apis" });
 });
 
 // Create mongodb connection
@@ -19,3 +19,5 @@ mongoose.connect(process.env.MONGO_URI, () =>
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
+
+module.exports = app;
