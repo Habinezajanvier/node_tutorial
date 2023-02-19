@@ -1,8 +1,8 @@
-const Posts = require("../schema/post");
+const Contacts = require("../schema/post");
 
 const getAll = async (req, res) => {
   try {
-    const allPost = await Posts.find();
+    const allPost = await Contacts.find();
     res.status(200).json({
       message: "Post found successfully",
       data: allPost,
@@ -15,8 +15,8 @@ const getAll = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const newPost = new Posts({ title, description });
+    const { email, name, message } = req.body;
+    const newPost = new Contacts({ email, name, message });
     const createdPost = await newPost.save();
     res
       .status(201)
@@ -29,7 +29,7 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
   try {
     // Getting the post from db
-    const post = await Posts.findById(req.params.id);
+    const post = await Contacts.findById(req.params.id);
 
     // Returning 404 if the post was not found
     if (!post) res.status(404).json({ error: "No post found" });
@@ -50,7 +50,7 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     // Getting the post from db
-    const post = await Posts.findById(req.params.id);
+    const post = await Contacts.findById(req.params.id);
 
     // Returning 404 if the post was not found
     if (!post) res.status(404).json({ error: "No post found" });
